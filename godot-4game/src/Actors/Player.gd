@@ -1,6 +1,7 @@
-extends Actor
+extends CharacterBody2D
 
-
+@export var speed: = Vector2(400.0, 500.0)
+@export var gravity: = 3500.0
 @export var stomp_impulse: = 600.0
 
 
@@ -13,7 +14,7 @@ func _on_EnemyDetector_body_entered(_body: PhysicsBody2D) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	super._physics_process(delta)
+	velocity.y += gravity * delta
 	var is_jump_interrupted: = Input.is_action_just_released("jump") and velocity.y < 0.0
 	var direction: = get_direction()
 	velocity = calculate_move_velocity(velocity, direction, speed, is_jump_interrupted)

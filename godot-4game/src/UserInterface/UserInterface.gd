@@ -4,7 +4,6 @@ extends Node
 @onready var scene_tree: SceneTree = get_tree()
 @onready var score_label: Label = $Score
 @onready var pause_overlay: ColorRect = $PauseOverlay
-@onready var title_label: Label = $PauseOverlay/Title
 @onready var main_screen_button: Button = $PauseOverlay/PauseMenu/MainScreenButton
 
 const MESSAGE_DIED: = "You died"
@@ -21,7 +20,6 @@ func _ready() -> void:
 
 func _on_Player_died() -> void:
 	self.paused = true
-	title_label.text = MESSAGE_DIED
 
 
 func _on_Player_reset() -> void:
@@ -29,7 +27,7 @@ func _on_Player_reset() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("pause") and title_label.text != MESSAGE_DIED:
+	if event.is_action_pressed("pause"):
 		self.paused = not self.paused
 
 

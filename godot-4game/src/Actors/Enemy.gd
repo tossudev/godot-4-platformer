@@ -1,6 +1,7 @@
-extends Actor
+extends CharacterBody2D
 
-
+@export var speed: = Vector2(400.0, 500.0)
+@export var gravity: = 3500.0
 @onready var stomp_area: Area2D = $StompArea2D
 
 @export var score: = 100
@@ -11,8 +12,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	super._physics_process(delta)
-	
+	velocity.y += gravity * delta
 	velocity.x *= -1 if is_on_wall() else 1
 	move_and_slide()
 

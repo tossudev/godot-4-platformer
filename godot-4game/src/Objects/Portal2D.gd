@@ -15,8 +15,6 @@ func _get_configuration_warning() -> String:
 
 
 func teleport() -> void:
-	get_tree().paused = true
 	anim_player.play("fade_out")
 	await anim_player.animation_finished
-	get_tree().paused = false
 	get_tree().change_scene_to_packed(next_scene)
