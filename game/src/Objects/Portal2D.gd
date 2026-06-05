@@ -5,6 +5,8 @@ extends Area2D
 
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
 
+var teleported: bool = false
+
 
 func _on_body_entered(_body: PhysicsBody2D):
 	teleport()
@@ -15,6 +17,10 @@ func _get_configuration_warning() -> String:
 
 
 func teleport() -> void:
+	if teleported:
+		return
+	
+	teleported = true
 	anim_player.play("fade_out")
 	await anim_player.animation_finished
 	get_tree().change_scene_to_packed(next_scene)
